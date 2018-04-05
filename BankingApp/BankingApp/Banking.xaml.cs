@@ -24,7 +24,7 @@ namespace BankingApp
         decimal cInvestmentBalance = 3138.78m;
         decimal amountTransfer = 0.0m;
         decimal fromBalance = 4346.37m, toBalance = 1386.37m;
-
+        decimal chequeFee = 2m;
         // use this two variables to keep track which radio button has clicked
         string fromRadioButtonChecked = "SavingsRadioButtonOn";
         String toRadioButtonChecked = "ChequeRadioButtonOn";
@@ -41,7 +41,7 @@ namespace BankingApp
 
         private void fromChequeRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-
+          
         }
 
         private void fromInvestmentRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -93,7 +93,7 @@ namespace BankingApp
                     amountTextBox.SelectAll();
                 }
                 else
-                {
+                {   
                     // Test which From radio button and which To radio button are on and calculate appropriate balance
                     string whichRadioButtonsAreChecked = fromRadioButtonChecked + "&" + toRadioButtonChecked;
                     switch (whichRadioButtonsAreChecked)
@@ -133,7 +133,7 @@ namespace BankingApp
                             break;
 
                         case "ChequeRadioButtonOn&SavingsRadioButtonOn":  // from Cheque to Savings
-                            fromBalance = fromBalance - amountTransfer;
+                            fromBalance = fromBalance - amountTransfer - chequeFee;
                             cChequeBalance = fromBalance;
                             fromBalanceLabel.Content = cChequeBalance.ToString("C");
 
@@ -143,7 +143,7 @@ namespace BankingApp
                             break;
 
                         case "ChequeRadioButtonOn&InvestmentRadioButtonOn":   // from Cheque to Investment
-                            fromBalance = fromBalance - amountTransfer;
+                            fromBalance = fromBalance - amountTransfer - chequeFee;
                             cChequeBalance = fromBalance;
                             fromBalanceLabel.Content = cChequeBalance.ToString("C");
 
@@ -171,8 +171,11 @@ namespace BankingApp
                             cChequeBalance = toBalance;
                             toBalanceLabel.Content = cChequeBalance.ToString("C");
                             break;
+
+                       
                     }
-                }
+              
+            }
         }
 
         private void toSavingsRadioButton_Click(object sender, RoutedEventArgs e)
@@ -222,5 +225,7 @@ namespace BankingApp
             fromBalance = cInvestmentBalance;
             fromRadioButtonChecked = "InvestmentRadioButtonOn";  // this variable only stored a string
         }
+
+       
     }
 }
