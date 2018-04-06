@@ -24,6 +24,7 @@ namespace BankingApp
         decimal cInvestmentBalance = 3138.78m;
         decimal amountTransfer = 0.0m;
         decimal fromBalance = 4346.37m, toBalance = 1386.37m;
+        decimal transferFee = 0m;
 
         // use this two variables to keep track which radio button has clicked
         string fromRadioButtonChecked = "SavingsRadioButtonOn";
@@ -46,13 +47,13 @@ namespace BankingApp
 
         private void fromInvestmentRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
 
         private void transferButton_Click(object sender, RoutedEventArgs e)
         {
-// working out the transfer amount
+            // working out the transfer amount
 
             // validate transfer amount input
             try
@@ -85,94 +86,96 @@ namespace BankingApp
                 amountTextBox.SelectAll();
             }
             else
-            // Handle insufficient fund
-                if (amountTransfer > fromBalance)
+                if (fromRadioButtonChecked == "InvestmentRadioButtonOn") { transferFee = 30m; }
+                if (amountTransfer > fromBalance - transferFee)
+            {
+                MessageBox.Show("Error! You have insufficient fund. Enter another amount");
+                Keyboard.Focus(amountTextBox);
+                amountTextBox.SelectAll();
+            }
+            else
+            {
+                // Test which From radio button and which To radio button are on and calculate appropriate balance
+                string whichRadioButtonsAreChecked = fromRadioButtonChecked + "&" + toRadioButtonChecked;
+                switch (whichRadioButtonsAreChecked)
                 {
-                    MessageBox.Show("Error! You have insufficient fund. Enter another amount");
-                    Keyboard.Focus(amountTextBox);
-                    amountTextBox.SelectAll();
+
+                    case "SavingsRadioButtonOn&SavingsRadioButtonOn":  // from Savings to Savings
+                        MessageBox.Show("Error - cannot transfer from Savings to Savings");
+                        break;
+
+                    case "ChequeRadioButtonOn&ChequeRadioButtonOn":  // from Cheque to Cheque
+                        MessageBox.Show("Error - cannot transfer from Cheque to Cheque");
+                        break;
+
+                    case "InvestmentRadioButtonOn&InvestmentRadioButtonOn":  // from Investment to Investment
+                        MessageBox.Show("Error - cannot transfer from Investment to Investment");
+                        break;
+
+
+                    case "SavingsRadioButtonOn&ChequeRadioButtonOn":  // from Savings to Cheque
+                        fromBalance = fromBalance - amountTransfer;
+                        cSavingsBalance = fromBalance;
+                        fromBalanceLabel.Content = cSavingsBalance.ToString("C");
+
+                        toBalance = toBalance + amountTransfer;
+                        cChequeBalance = toBalance;
+                        toBalanceLabel.Content = cChequeBalance.ToString("C");
+                        break;
+
+                    case "SavingsRadioButtonOn&InvestmentRadioButtonOn":   // from Saving to Investment
+                        fromBalance = fromBalance - amountTransfer;
+                        cSavingsBalance = fromBalance;
+                        fromBalanceLabel.Content = cSavingsBalance.ToString("C");
+
+                        toBalance = toBalance + amountTransfer;
+                        cInvestmentBalance = toBalance;
+                        toBalanceLabel.Content = cInvestmentBalance.ToString("C");
+                        break;
+
+                    case "ChequeRadioButtonOn&SavingsRadioButtonOn":  // from Cheque to Savings
+                        fromBalance = fromBalance - amountTransfer;
+                        cChequeBalance = fromBalance;
+                        fromBalanceLabel.Content = cChequeBalance.ToString("C");
+
+                        toBalance = toBalance + amountTransfer;
+                        cSavingsBalance = toBalance;
+                        toBalanceLabel.Content = cSavingsBalance.ToString("C");
+                        break;
+
+                    case "ChequeRadioButtonOn&InvestmentRadioButtonOn":   // from Cheque to Investment
+                        fromBalance = fromBalance - amountTransfer;
+                        cChequeBalance = fromBalance;
+                        fromBalanceLabel.Content = cChequeBalance.ToString("C");
+
+                        toBalance = toBalance + amountTransfer;
+                        cInvestmentBalance = toBalance;
+                        toBalanceLabel.Content = cInvestmentBalance.ToString("C");
+                        break;
+
+                    case "InvestmentRadioButtonOn&SavingsRadioButtonOn":  // from Investment to Saving
+                        
+                            fromBalance = fromBalance - amountTransfer - transferFee;
+                        cInvestmentBalance = fromBalance;
+                        fromBalanceLabel.Content = cInvestmentBalance.ToString("C");
+
+                        toBalance = toBalance + amountTransfer;
+                        cSavingsBalance = toBalance;
+                        toBalanceLabel.Content = cSavingsBalance.ToString("C");
+                        break;
+
+                    case "InvestmentRadioButtonOn&ChequeRadioButtonOn":  //from Investment to Cheque
+                        
+                        fromBalance = fromBalance - amountTransfer - transferFee;
+                        cInvestmentBalance = fromBalance;
+                        fromBalanceLabel.Content = cInvestmentBalance.ToString("C");
+
+                        toBalance = toBalance + amountTransfer;
+                        cChequeBalance = toBalance;
+                        toBalanceLabel.Content = cChequeBalance.ToString("C");
+                        break;
                 }
-                else
-                {
-                    // Test which From radio button and which To radio button are on and calculate appropriate balance
-                    string whichRadioButtonsAreChecked = fromRadioButtonChecked + "&" + toRadioButtonChecked;
-                    switch (whichRadioButtonsAreChecked)
-                    {
-
-                        case "SavingsRadioButtonOn&SavingsRadioButtonOn":  // from Savings to Savings
-                            MessageBox.Show("Error - cannot transfer from Savings to Savings");
-                            break;
-
-                        case "ChequeRadioButtonOn&ChequeRadioButtonOn":  // from Cheque to Cheque
-                            MessageBox.Show("Error - cannot transfer from Cheque to Cheque");
-                            break;
-
-                        case "InvestmentRadioButtonOn&InvestmentRadioButtonOn":  // from Investment to Investment
-                            MessageBox.Show("Error - cannot transfer from Investment to Investment");
-                            break;
-
-
-                        case "SavingsRadioButtonOn&ChequeRadioButtonOn":  // from Savings to Cheque
-                            fromBalance = fromBalance - amountTransfer;
-                            cSavingsBalance = fromBalance;
-                            fromBalanceLabel.Content = cSavingsBalance.ToString("C");
-
-                            toBalance = toBalance + amountTransfer;
-                            cChequeBalance = toBalance;
-                            toBalanceLabel.Content = cChequeBalance.ToString("C");
-                            break;
-
-                        case "SavingsRadioButtonOn&InvestmentRadioButtonOn":   // from Saving to Investment
-                            fromBalance = fromBalance - amountTransfer;
-                            cSavingsBalance = fromBalance;
-                            fromBalanceLabel.Content = cSavingsBalance.ToString("C");
-
-                            toBalance = toBalance + amountTransfer;
-                            cInvestmentBalance = toBalance;
-                            toBalanceLabel.Content = cInvestmentBalance.ToString("C");
-                            break;
-
-                        case "ChequeRadioButtonOn&SavingsRadioButtonOn":  // from Cheque to Savings
-                            fromBalance = fromBalance - amountTransfer;
-                            cChequeBalance = fromBalance;
-                            fromBalanceLabel.Content = cChequeBalance.ToString("C");
-
-                            toBalance = toBalance + amountTransfer;
-                            cSavingsBalance = toBalance;
-                            toBalanceLabel.Content = cSavingsBalance.ToString("C");
-                            break;
-
-                        case "ChequeRadioButtonOn&InvestmentRadioButtonOn":   // from Cheque to Investment
-                            fromBalance = fromBalance - amountTransfer;
-                            cChequeBalance = fromBalance;
-                            fromBalanceLabel.Content = cChequeBalance.ToString("C");
-
-                            toBalance = toBalance + amountTransfer;
-                            cInvestmentBalance = toBalance;
-                            toBalanceLabel.Content = cInvestmentBalance.ToString("C");
-                            break;
-
-                        case "InvestmentRadioButtonOn&SavingsRadioButtonOn":  // from Investment to Saving
-                            fromBalance = fromBalance - amountTransfer;
-                            cInvestmentBalance = fromBalance;
-                            fromBalanceLabel.Content = cInvestmentBalance.ToString("C");
-
-                            toBalance = toBalance + amountTransfer;
-                            cSavingsBalance = toBalance;
-                            toBalanceLabel.Content = cSavingsBalance.ToString("C");
-                            break;
-
-                        case "InvestmentRadioButtonOn&ChequeRadioButtonOn":  //from Investment to Cheque
-                            fromBalance = fromBalance - amountTransfer;
-                            cInvestmentBalance = fromBalance;
-                            fromBalanceLabel.Content = cInvestmentBalance.ToString("C");
-
-                            toBalance = toBalance + amountTransfer;
-                            cChequeBalance = toBalance;
-                            toBalanceLabel.Content = cChequeBalance.ToString("C");
-                            break;
-                    }
-                }
+            }
         }
 
         private void toSavingsRadioButton_Click(object sender, RoutedEventArgs e)
