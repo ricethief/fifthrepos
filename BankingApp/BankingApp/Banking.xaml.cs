@@ -86,8 +86,8 @@ namespace BankingApp
                 amountTextBox.SelectAll();
             }
             else
-            
-                if (fromRadioButtonChecked == "InvestmentRadioButtonOn") { transferFee = 30m; }
+             if (fromRadioButtonChecked == "ChequeRadioButtonOn") { transferFee = 2m; }
+            if (fromRadioButtonChecked == "InvestmentRadioButtonOn") { transferFee = 30m; }
                 if (amountTransfer > fromBalance - transferFee)
             {
                 MessageBox.Show("Error! You have insufficient fund. Enter another amount");
@@ -134,21 +134,20 @@ namespace BankingApp
                         toBalanceLabel.Content = cInvestmentBalance.ToString("C");
                         break;
 
-                            fromBalanceLabel.Content = cChequeBalance.ToString("C");
-                       
-                            fromBalance = fromBalance - amountTransfer - transferFee;
-                            cChequeBalance = fromBalance;
-                            fromBalanceLabel.Content = cChequeBalance.ToString("C");
+                    case "ChequeRadioButtonOn&SavingsRadioButtonOn":  // from Cheque to Savings
+                        fromBalance = fromBalance - amountTransfer - transferFee;
+                        cChequeBalance = fromBalance;
+                        fromBalanceLabel.Content = cChequeBalance.ToString("C");
 
                         toBalance = toBalance + amountTransfer;
                         cSavingsBalance = toBalance;
                         toBalanceLabel.Content = cSavingsBalance.ToString("C");
                         break;
 
-
-                            fromBalance = fromBalance - amountTransfer - transferFee;
-                            cChequeBalance = fromBalance;
-                            fromBalanceLabel.Content = cChequeBalance.ToString("C");
+                    case "ChequeRadioButtonOn&InvestmentRadioButtonOn":   // from Cheque to Investment
+                        fromBalance = fromBalance - amountTransfer - transferFee;
+                        cChequeBalance = fromBalance;
+                        fromBalanceLabel.Content = cChequeBalance.ToString("C");
 
                         toBalance = toBalance + amountTransfer;
                         cInvestmentBalance = toBalance;

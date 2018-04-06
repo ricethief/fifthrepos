@@ -47,3 +47,18 @@ C:\investment\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.exe
 C:\investment\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.pdb
 C:\investment\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.csprojResolveAssemblyReference.cache
 >>>>>>> remotes/origin/feat_investment
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\bin\Debug\BankingApp.exe.config
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\bin\Debug\BankingApp.exe
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\bin\Debug\BankingApp.pdb
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\Banking.baml
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\MainWindow.baml
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\Banking.g.cs
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\MainWindow.g.cs
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\App.g.cs
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp_MarkupCompile.cache
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.g.resources
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.Properties.Resources.resources
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.csproj.GenerateResource.Cache
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.csproj.CoreCompileInputs.cache
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.exe
+C:\investment\marging\fifthrepos\BankingApp\BankingApp\obj\Debug\BankingApp.pdb
